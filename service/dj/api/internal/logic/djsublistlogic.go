@@ -1,0 +1,49 @@
+package logic
+
+import (
+	"bytes"
+	"context"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	. "music/common"
+	"music/service/dj/api/internal/svc"
+	"music/service/dj/api/internal/types"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+type DjSublistLogic struct {
+	logx.Logger
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+}
+
+func NewDjSublistLogic(ctx context.Context, svcCtx *svc.ServiceContext) DjSublistLogic {
+	return DjSublistLogic{
+		Logger: logx.WithContext(ctx),
+		ctx:    ctx,
+		svcCtx: svcCtx,
+	}
+}
+
+func (l *DjSublistLogic) DjSublist(req types.DjSublistReq) (resp *types.DjSublistReply, err error) {
+	res := Request("POST", "https://music.163.com/weapi/djradio/get/subed", req, Options{
+		Crypto: "weapi",
+		Cookie: "",
+		Proxy:  "",
+		RealIP: "",
+	})
+
+	defer res.Body.Close()
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println("err:", err)
+	}
+	decoder := json.NewDecoder(bytes.NewBuffer(body))
+	if err := decoder.Decode(&resp); err != nil {
+		fmt.Println("err:", err)
+		panic(err)
+	}
+	return resp, nil
+}

@@ -1,0 +1,196 @@
+syntax = "v1"
+
+info(
+	title: "music"
+	desc: "no"
+	author: "yang"
+	email: "type email here"
+	version: "1"
+)
+
+type (
+	//"说明: 调用此接口,可获取歌手分类列表"
+	ArtistListReq {
+		Limit  string `form:"limit,optional,default=30"`
+		Offset string `form:"offset,optional,default=0"`
+		Type   string `form:"type,optional,default=1"`
+		Area   string `form:"area,optional"`
+	}
+
+	ArtistListReply {
+		Artists interface{} `json:"artists"`
+		More    bool        `json:"more"`
+		Code    int         `json:"code"`
+	}
+)
+
+type (
+	//调用此接口 , 传入歌手 id, 可获得歌手专辑内容
+	ArtistAlbumReq {
+		Limit  string `form:"limit,optional,default=30"`
+		Offset string `form:"offset,optional,default=0"`
+		Total  bool   `form:"total,optional,default=true"`
+		Id     string `form:"id"`
+	}
+	ArtistAlbumReply {
+		Artist    interface{} `json:"artist"`
+		HotAlbums interface{} `json:"hotAlbums"`
+		More      bool        `json:"more"`
+		Code      int         `json:"code"`
+	}
+)
+
+type (
+	ArtistDescReq {
+		Id string `form:"id"`
+	}
+
+	ArtistDescReply {
+		Introduction interface{} `json:"introduction"`
+		BriefDesc    interface{} `json:"briefDesc"`
+		Count        int         `json:"count"`
+		TopicData    interface{} `json:"topicData"`
+		Code         int         `json:"code"`
+	}
+)
+
+type (
+	ArtistDetailReq {
+		Id string `form:"id"`
+	}
+	ArtistDetailReply {
+		Code    int         `json:"code"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+)
+
+type (
+	ArtistFansReq {
+		Id     string `form:"id"`
+		Limit  string `form:"limit,default=20"`
+		Offset string `form:"offset,default=0"`
+	}
+	ArtistFansReply {
+		Code    int         `json:"code"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+)
+
+type (
+	ArtistFollowCountReq {
+		Id string `form:"id"`
+	}
+	ArtistFollowCountReply {
+		Code    int         `json:"code"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+)
+
+type (
+	ArtistMvReq {
+		ArtistId string `form:"artistId"`
+		Limit    string `form:"limit"`
+		Offset   string `form:"offset"`
+		Total    bool   `form:"total,default=true"`
+	}
+	ArtistMvReply {
+		Mvs     interface{} `json:"mvs"`
+		Time    int64       `json:"time"`
+		HasMore bool        `json:"hasMore"`
+		Code    int         `json:"code"`
+	}
+)
+
+type (
+	ArtistSongsReq {
+		Id            int    `form:"id"`
+		Private_cloud string `form:"private_cloud,default=true"`
+		Work_type     int    `form:"work_type,default=1"`
+		Order         string `form:"order,default=hot"`
+		Offset        string `form:"offset,default=0"`
+		Limit         string `form:"limit,default=100"`
+	}
+	ArtistSongsReply {
+		Songs interface{} `json:"songs"`
+		More  bool        `json:"more"`
+		Total int         `json:"total"`
+		Code  int         `json:"code"`
+	}
+)
+
+type (
+	ArtistSubReq {
+		T         string `form:"t,options=sub,unsub"`
+		ArtistId  string `form:"artistId"`
+		ArtistIds string `form:"artistIds"`
+	}
+)
+
+type (
+	ArtistSubListReq {
+		Limit  string `form:"limit,default=25"`
+		Offset string `form:"offset,default=0"`
+		Total  bool   `form:"total,default=true"`
+	}
+)
+
+type (
+	ArtistTopSongReq {
+		Id int `form:"id"`
+	}
+	ArtistTopSongReply {
+		Code  int         `json:"code"`
+		More  bool        `json:"more"`
+		Songs interface{} `json:"songs"`
+	}
+)
+
+type (
+	ArtistVideoReq {
+		ArtistId int `form:"artistId"`
+		Size     int `form:"size,default=10"`
+		Cursor   int `form:"cursor,default=0"`
+		Tap      int `form:"tap,default=0"`
+		Order    int `form:"order,default=0"`
+	}
+	ArtistVideoReply {
+		Code    int         `json:"code"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+)
+
+service Artist-api {
+	@handler ArtistList
+	get /artist/list (ArtistListReq) returns (ArtistListReply)
+	
+	@handler ArtistAlbum
+	get /artist/album (ArtistAlbumReq) returns (ArtistAlbumReply)
+	
+	@handler ArtistDesc
+	get /artist/desc (ArtistDescReq) returns (ArtistDescReply)
+	
+	@handler ArtistDetail
+	get /artist/detail (ArtistDetailReq) returns (ArtistDetailReply)
+	
+	@handler ArtistFans
+	get /artist/fans (ArtistFansReq) returns (ArtistFansReply)
+	
+	@handler ArtistFollowCount
+	get /artist/follow/count (ArtistFollowCountReq) returns (ArtistFollowCountReply)
+	
+	@handler ArtistMv
+	get /artist/mv (ArtistMvReq) returns (ArtistMvReply)
+	
+	@handler ArtistSongs
+	get /artist/songs (ArtistSongsReq) returns (ArtistSongsReply)
+	
+	@handler ArtistTopSong
+	get /artist/top/song (ArtistTopSongReq) returns (ArtistTopSongReply)
+	
+	@handler ArtistVideo
+	get /artist/video (ArtistVideoReq) returns (ArtistVideoReply)
+}

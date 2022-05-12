@@ -1,0 +1,103 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	LoginReq {
+		Email         string `form:"email"`
+		Password      string `form:"password"`
+		RememberLogin bool   `form:"rememberLogin,default=true"`
+	}
+	LoginReply {
+	}
+)
+
+type (
+	LoginCellphoneReq {
+		Phone         int    `form:"phone"`
+		Countrycode   int    `form:"countrycode,default=86"`
+		Captcha       string `form:"captcha,optional,omitempty"`
+		Password      string `form:"password"`
+		RememberLogin bool   `form:"rememberLogin,default=true"`
+	}
+	LoginCellphoneReply {
+		Code      int         `json:"code"`
+		Message   string      `json:"message"`
+		LoginType int         `json:"loginType"`
+		Account   interface{} `json:"account"`
+		Token     string      `json:"token"`
+		Profile   interface{} `json:"profile"`
+		Bindings  interface{} `json:"bindings"`
+		Cookie    string      `json:"cookie"`
+	}
+)
+
+type (
+	LoginQrCheckReq {
+		Key  string `form:"key"`
+		Type int    `form:"type,default=1"`
+	}
+
+	LoginQrCheckReply {
+	}
+)
+
+type (
+	LoginQrCreateReq {
+		Key   string `form:"key"`
+		Qrimg string `form:"qrimg,optional"`
+	}
+	LoginQrCreateReply {
+	}
+)
+
+type (
+	LoginQrKeyReq {
+		Type int `form:"type,default=1"`
+	}
+	LoginQrKeyReply {
+	}
+)
+
+type (
+	LoginRefreshReq {
+	}
+	LoginRefreshReply {
+	}
+)
+
+type (
+	LoginStatusReq {
+	}
+	LoginStatusReply {
+	}
+)
+
+service login-api {
+	@handler Login
+	get /login (LoginReq) returns (LoginReply)
+	
+	@handler LoginCellphone
+	get /login/cellphone (LoginCellphoneReq) returns (LoginCellphoneReply)
+	
+	@handler LoginQrCheck
+	get /login/qr/check (LoginQrCheckReq) returns (LoginQrCheckReply)
+	
+	@handler LoginQrCreate
+	get /login/qr/create (LoginQrCreateReq) returns (LoginQrCreateReply)
+	
+	@handler LoginQrKey
+	post /login/qr/key (LoginQrKeyReq) returns (LoginQrKeyReply)
+	
+	@handler LoginRefresh
+	get /login/refresh (LoginRefreshReq) returns (LoginRefreshReply)
+	
+	@handler LoginStatus
+	get /login/status (LoginStatusReq) returns (LoginStatusReply)
+}

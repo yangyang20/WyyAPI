@@ -1,0 +1,111 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	MsgCommentsReq {
+		BeforeTime string `form:"beforeTime,default=-1"`
+		Limit      int    `form:"limit,default=30"`
+		Total      bool   `form:"total,default=true"`
+		Uid        int    `form:"uid"`
+	}
+	MsgCommentsReply {
+		Code     int         `json:"code"`
+		Total    int         `json:"total"`
+		Comments interface{} `json:"comments"`
+		More     bool        `json:"more"`
+	}
+)
+
+type (
+	MsgForwardsReq {
+		Offset int  `form:"offset,defaylt=0"`
+		Limit  int  `form:"limit,default=30"`
+		Total  bool `form:"total,default=true"`
+	}
+	MsgForwardsReply {
+		NewCount int         `json:"newCount"`
+		Lasttime int         `json:"lasttime"`
+		More     bool        `json:"more"`
+		Forwards interface{} `json:"forwards"`
+		Code     int         `json:"code"`
+	}
+)
+
+type (
+	MsgNoticesReq {
+		Limit int    `form:"limit,default=30"`
+		Time  string `form:"time,default=-1"`
+	}
+	MsgNoticesReply {
+		Notices interface{} `json:"notices"`
+		More    bool        `json:"more"`
+		Code    int         `json:"code"`
+	}
+)
+
+type (
+	MsgPrivateReq {
+		Offset int  `form:"offset,defaylt=0"`
+		Limit  int  `form:"limit,default=30"`
+		Total  bool `form:"total,default=true"`
+	}
+	MsgPrivateReply {
+		Msgs        interface{} `json:"msg"`
+		Code        int         `json:"code"`
+		More        bool        `json:"more"`
+		NewMsgCount int         `json:"newMsgCount"`
+	}
+)
+
+type (
+	MsgPrivateHistoryReq {
+		UserId int    `form:"userId"`
+		Limit  int    `form:"limit,default=30"`
+		Time   string `form:"time,default=0"`
+		Total  bool   `form:"total,default=true"`
+	}
+	MsgPrivateHistoryReply {
+		Code     int         `json:"code"`
+		IsArtist bool        `json:"isArtist"`
+		IsSubed  bool        `json:"isSubed"`
+		Hint     string      `json:"hint"`
+		More     bool        `json:"more"`
+		Msgs     interface{} `json:"msgs"`
+	}
+)
+
+type (
+	MsgRecentcontactReq {
+	}
+	MsgRecentcontactReply {
+		Code int         `json:"code"`
+		Data interface{} `json:"data"`
+	}
+)
+
+service msg-api{
+	@handler MsgComments
+	get /msg/comments (MsgCommentsReq) returns (MsgCommentsReply)
+	
+	@handler MsgForwards
+	get /msg/forwards (MsgForwardsReq) returns (MsgForwardsReply)
+	
+	@handler MsgNotices
+	get /msg/notices (MsgNoticesReq) returns (MsgNoticesReply)
+	
+	@handler MsgPrivate
+	get /msg/private (MsgPrivateReq) returns (MsgPrivateReply)
+	
+	@handler MsgPrivateHistory
+	get /msg/private/history (MsgPrivateHistoryReq) returns (MsgPrivateHistoryReply)
+	
+	@handler MsgRecentcontact
+	get /msg/recentcontact  (MsgRecentcontactReq) returns (MsgRecentcontactReply)
+}

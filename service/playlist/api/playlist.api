@@ -1,0 +1,257 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	PlaylistCatlistReq   struct{}
+	PlaylistCatlistReply {
+		Code       int         `json:"code"`
+		All        interface{} `json:"all"`
+		Sub        interface{} `json:"sub"`
+		Categories interface{} `json:"categories"`
+	}
+)
+
+type (
+	PlaylistCreateReq {
+		Name    string `form:"name"`
+		Privacy string `form:"privacy"`
+		Type    string `form:"type,default=NORMAL"`
+	}
+	PlaylistCreateReply {
+		Code     int         `json:"code"`
+		Playlist interface{} `json:"playlist"`
+		Id       int         `json:"id"`
+	}
+)
+
+type (
+	PlaylistDeleteReq {
+		Id string `form:"id"`
+	}
+	PlaylistDeleteReply {
+		Code    int         `json:"code"`
+		Msg     string      `json:"msg"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+)
+
+type (
+	PlaylistDescUpdateReq {
+		Id   string `form:"id"`
+		Desc string `form:"desc"`
+	}
+	PlaylistDescUpdateReply {
+	}
+)
+
+type (
+	PlaylistDetailReq {
+		Id string `form:"id"`
+		N  int    `form:"n,default=100000"`
+		S  string `form:"s,default=8"`
+	}
+	PlaylistDetailReply {
+		Code            int         `json:"code"`
+		RelatedVideos   interface{} `json:"relatedVideos"`
+		Playlist        interface{} `json:"playlist"`
+		Urls            interface{} `json:"urls"`
+		Privileges      interface{} `json:"privileges"`
+		SharedPrivilege interface{} `json:"sharedPrivilege"`
+		ResEntrance     interface{} `json:"resEntrance"`
+	}
+)
+
+type (
+	PlaylistDetailDynamIcReq {
+		Id string `form:"id"`
+		N  int    `form:"n,default=100000"`
+		S  string `form:"s,default=8"`
+	}
+	PlaylistDetailDynamIcReply {
+		Code            int         `json:"code"`
+		RelatedVideos   interface{} `json:"relatedVideos"`
+		Playlist        interface{} `json:"playlist"`
+		Urls            interface{} `json:"urls"`
+		Privileges      interface{} `json:"privileges"`
+		SharedPrivilege interface{} `json:"sharedPrivilege"`
+		ResEntrance     interface{} `json:"resEntrance"`
+	}
+)
+
+type (
+	PlaylistHighqualityTagsReq {
+	}
+	PlaylistHighqualityTagsReply {
+		Tags interface{} `json:"tags"`
+		Code int         `json:"code"`
+	}
+)
+
+type (
+	PlaylistHotReply {
+		Tags interface{} `json:"tags"`
+		Code int         `json:"code"`
+	}
+)
+
+type (
+	PlaylistMylikeReq {
+		Time  string `form:"time,default=-1"`
+		Limit string `form:"limit,default=12"`
+	}
+	PlaylistMylikeReply {
+		Code    int         `json:"code"`
+		Data    interface{} `json:"data"`
+		Message string      `json:"message"`
+	}
+)
+
+type (
+	PlaylistNameUpdateReq {
+		Id   string `form:"id"`
+		Name string `form:"name"`
+	}
+	PlaylistNameUpdateReply {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+	}
+)
+
+type (
+	PlaylistOrderUpdateReq {
+		Ids string `form:"ids"`
+	}
+	PlaylistOrderUpdateReply {
+		Code int `json:"code"`
+	}
+)
+
+type (
+	PlaylistPrivacyReq {
+		Id      int `form:"id"`
+		Privack int `form:"privack,default=0"`
+	}
+	PlaylistPrivacyReply {
+	}
+)
+
+type (
+	PlaylistSubscribeReq {
+		T  string `form:"t,options=subscribe,unsubscribe"`
+		Id string `form:"id"`
+	}
+	PlaylistSubscribeReply {
+		Code int `json:"code"`
+	}
+)
+
+type (
+	PlaylistSubscriberSReq {
+		Id     string `form:"id"`
+		Limit  int    `form:"limit,default=20"`
+		Offset int    `form:"offset,default=0"`
+	}
+	PlaylistSubscriberSReply {
+		Total       int         `json:"total"`
+		Code        int         `json:"code"`
+		More        bool        `json:"more"`
+		Subscribers interface{} `json:"subscribers"`
+	}
+)
+
+type (
+	PlaylistTagsUpdateReq {
+		Id   int    `form:"id"`
+		Tags string `form:"tags"`
+	}
+	PlaylistTagsUpdateReqly {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+	}
+)
+
+type (
+	PlaylistTrackAddReq {
+		Id     string `form:"id"`
+		Tracks string `form:"tracks"`
+	}
+	PlaylistTrackAddReply {
+		Msg     string `json:"msg"`
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+	}
+)
+
+type (
+	PlaylistUpdatePlaycountReq {
+		Id string `form:"id"`
+	}
+	PlaylistUpdatePlaycountReply {
+		Code int `json:"code"`
+	}
+)
+
+type (
+	PlaylistVideoRecentReq {
+	}
+	PlaylistVideoRecentReply {
+	}
+)
+
+service playlist-api{
+	@handler PlaylistCatlist
+	get /playlist/catlist (PlaylistCatlistReq) returns (PlaylistCatlistReply)
+	
+	@handler PlaylistCreate
+	get /playlist/create (PlaylistCatlistReq) returns (PlaylistCatlistReply)
+	
+	@handler PlaylistDelete
+	get /playlist/delete (PlaylistDeleteReq) returns (PlaylistDeleteReply)
+	
+	@handler PlaylistDetail
+	get /playlist/detail (PlaylistDetailReq) returns (PlaylistDetailReply)
+	
+	@handler PlaylistDetailDynamIc
+	get /playlist/detail/dynamIc (PlaylistDetailDynamIcReq) returns (PlaylistDetailDynamIcReply)
+	
+	@handler PlaylistHighqualityTags
+	get /playlist/highquality/tags (PlaylistHighqualityTagsReq) returns (PlaylistHighqualityTagsReply)
+	
+	@handler PlaylistHot
+	get /playlist/hot returns(PlaylistHotReply)
+	
+	@handler PlaylistMylike
+	get /playlist/mylike (PlaylistMylikeReq) returns (PlaylistMylikeReply)
+	
+	@handler PlaylistNameUpdate
+	get /playlist/name/update (PlaylistNameUpdateReq) returns (PlaylistNameUpdateReply)
+	
+	@handler PlaylistOrderUpdate
+	get /playlist/order/update (PlaylistOrderUpdateReq) returns (PlaylistOrderUpdateReply)
+	
+	@handler PlaylistSubscribe
+	get /playlist/subscribe (PlaylistSubscribeReq) returns (PlaylistSubscribeReply)
+	
+	@handler PlaylistSubscribers
+	get /playlist/subscribers (PlaylistSubscriberSReq) returns (PlaylistSubscriberSReply)
+	
+	@handler PlaylistTagsUpdate
+	get /playlist/tags/update (PlaylistTagsUpdateReq) returns (PlaylistTagsUpdateReqly)
+	
+	@handler PlaylistTrackAdd
+	get /playlist/track/add (PlaylistTrackAddReq) returns (PlaylistTrackAddReply)
+	
+	@handler PlaylistUpdatePlaycount
+	get  /playlist/update/playcount (PlaylistUpdatePlaycountReq) returns (PlaylistUpdatePlaycountReply)
+	
+	@handler PlaylistVideoRecent
+	get /playlist/video/recent returns (PlaylistVideoRecentReply)
+}

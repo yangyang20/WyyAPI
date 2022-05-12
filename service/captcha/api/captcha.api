@@ -1,0 +1,42 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	CaptchaSentReq {
+		Ctcode    int `form:"ctcode,default=86"`
+		Cellphone int `form:"cellphone"`
+	}
+	CaptchaSentReply {
+		Code int  `json:"code"`
+		Data bool `json:"data"`
+	}
+)
+
+type (
+	CaptchaVerifyReq {
+		Ctcode    int `form:"ctcode,default=86"`
+		Cellphone int `form:"cellphone"`
+		Captcha   int `form:"captcha"`
+	}
+	CaptchaVerifyReply {
+		Code int  `json:"code"`
+		Data bool `json:"data"`
+	}
+)
+
+service captcha-api{
+	// 发送验证码
+	@handler CaptchaSent
+	get /captcha/sent (CaptchaSentReq) returns (CaptchaSentReply)
+	
+	// 校验验证码
+	@handler CaptchaVerify
+	get /captcha/verify (CaptchaVerifyReq) returns (CaptchaVerifyReply)
+}

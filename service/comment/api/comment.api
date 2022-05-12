@@ -1,0 +1,310 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	CommentReq {
+		T         string `form:"t"`
+		Type      string `form:"type"`
+		Id        int    `form:"id"`
+		Content   string `form:"content,optional"`
+		CommentId string `form:"commentId,optional"`
+		ThreadId  string `form:"threadId,optional"`
+	}
+	CommentReply {
+		Code    int         `json:"code"`
+		Comment interface{} `json:"comment,omitempty"`
+		Msg     string      `json:"msg,omitempty"`
+	}
+)
+
+type (
+	CommentAlbumReq {
+		Rid        string `form:"rid"`
+		Limit      int    `form:"limit,default=20"`
+		Offset     int    `form:"offset,default=0"`
+		BeforeTime string `form:"beforeTime,default=0"`
+	}
+	CommentAlbumReply {
+		IsMusician    bool        `json:"isMusician"`
+		Cnum          int         `json:"cnum"`
+		UserId        int         `json:"userId"`
+		TopComments   interface{} `json:"topComments"`
+		MoreHot       bool        `json:"moreHot"`
+		HotComments   interface{} `json:"hotComments"`
+		CommentBanner interface{} `json:"commentBanner"`
+		Code          int         `json:"code"`
+		Comments      interface{} `json:"comments"`
+		Total         int         `json:"total"`
+		More          bool        `json:"more"`
+	}
+)
+
+type (
+	CommentDjReq {
+		Rid        string `form:"rid"`
+		Limit      int    `form:"limit,default=20"`
+		Offset     int    `form:"offset,default=0"`
+		BeforeTime string `form:"beforeTime,default=0"`
+	}
+	CommentDjReply {
+		IsMusician    bool        `json:"isMusician"`
+		Cnum          int         `json:"cnum"`
+		UserId        int         `json:"userId"`
+		TopComments   interface{} `json:"topComments"`
+		MoreHot       bool        `json:"moreHot"`
+		HotComments   interface{} `json:"hotComments"`
+		CommentBanner interface{} `json:"commentBanner"`
+		Code          int         `json:"code"`
+		Comments      interface{} `json:"comments"`
+		Total         int         `json:"total"`
+		More          bool        `json:"more"`
+	}
+)
+
+type (
+	CommentEventReq {
+		Limit      int    `form:"limit,default=20"`
+		Offset     int    `form:"offset,default=0"`
+		BeforeTime string `form:"beforeTime,default=0"`
+		ThreadId   string `form:"threadId"`
+	}
+	CommentEventReply {
+		IsMusician    bool        `json:"isMusician"`
+		Cnum          int         `json:"cnum"`
+		UserId        int         `json:"userId"`
+		TopComments   interface{} `json:"topComments"`
+		MoreHot       bool        `json:"moreHot"`
+		HotComments   interface{} `json:"hotComments"`
+		CommentBanner interface{} `json:"commentBanner"`
+		Code          int         `json:"code"`
+		Comments      interface{} `json:"comments"`
+		Total         int         `json:"total"`
+		More          bool        `json:"more"`
+	}
+)
+
+type (
+	CommentFloorReq {
+		ParentCommentId string `form:"parentCommentId"`
+		Type            string `form:"type"`
+		Time            string `form:"time,default=-1"`
+		Limit           int    `form:"limit,default=20"`
+		Id              int    `form:"id"`
+	}
+	CommentFloorReply {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	CommentHotReq {
+		Type       string `form:"type"`
+		Rid        string `form:"rid"`
+		Limit      int    `form:"limit,default=20"`
+		Offset     int    `form:"offset,default=0"`
+		BeforeTime string `form:"beforeTime,default=0"`
+	}
+	CommentHotReply {
+		TopComments interface{} `json:"topComments"`
+		HasMore     bool        `json:"hasMore"`
+		HotComments interface{} `json:"hotComments"`
+		Total       int         `json:"total"`
+		Code        int         `json:"code"`
+	}
+)
+
+type (
+	CommentHugListReq {
+		Type     string `form:"type,default=0"`
+		Sid      string `form:"sid"`
+		Uid      string `form:"uid"`
+		Cid      string `form:"cid"`
+		Cursor   string `form:"cursor,default=-1"`
+		Page     string `form:"page,default=1"`
+		IdCursor string `form:"idCursor,default=-1"`
+		PageSize int    `form:"pageSize,default=100"`
+	}
+	CommentHugListReply {
+		Code int         `json:"code"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	CommentLikeReq {
+		Id       string `form:"id"`
+		T        string `form:"t,options=like,unlike"`
+		Type     string `form:"type"`
+		Cid      string `form:"cid"`
+		ThreadId string `form:"threadId"`
+	}
+	CommentLikeReply {
+		Code int `json:"code"`
+	}
+)
+
+type (
+	CommentMusicReq {
+		Type       int    `form:"type"`
+		Rid        string `form:"rid"`
+		Limit      int    `form:"limit,default=20"`
+		Offset     int    `form:"offset,default=0"`
+		BeforeTime string `form:"beforeTime,default=0"`
+	}
+	CommentMusicReply {
+		IsMusician    bool        `json:"isMusician"`
+		Cnum          int         `json:"cnum"`
+		UserId        int         `json:"userId"`
+		TopComments   interface{} `json:"topComments"`
+		MoreHot       bool        `json:"moreHot"`
+		HotComments   interface{} `json:"hotComments"`
+		CommentBanner interface{} `json:"commentBanner"`
+		Code          int         `json:"code"`
+		Comments      interface{} `json:"comments"`
+		Total         int         `json:"total"`
+		More          bool        `json:"more"`
+	}
+)
+
+type (
+	CommentMvReq {
+		Type       int    `form:"type"`
+		Rid        string `form:"rid"`
+		Limit      int    `form:"limit,default=20"`
+		Offset     int    `form:"offset,default=0"`
+		BeforeTime string `form:"beforeTime,default=0"`
+	}
+	CommentMvReply {
+		IsMusician    bool        `json:"isMusician"`
+		Cnum          int         `json:"cnum"`
+		UserId        int         `json:"userId"`
+		TopComments   interface{} `json:"topComments"`
+		MoreHot       bool        `json:"moreHot"`
+		HotComments   interface{} `json:"hotComments"`
+		CommentBanner interface{} `json:"commentBanner"`
+		Code          int         `json:"code"`
+		Comments      interface{} `json:"comments"`
+		Total         int         `json:"total"`
+		More          bool        `json:"more"`
+	}
+)
+
+type (
+	CommentNewRep {
+		Type      string `form:"type"`
+		Id        string `form:"id"`
+		PageSize  int    `form:"pageSize,default=20"`
+		PageNo    int    `form:"pageNo,default=1"`
+		SortType  int    `form:"sortType,default=99"`
+		ShowInner bool   `form:"showInner,default=true"`
+		Cursor    string `form:"cursor,omitempty,default=0"`
+	}
+	CommentNewReply {
+		Code int         `json:"code"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	CommentPlayListReq {
+		Rid        string `form:"rid"`
+		Limit      int    `form:"limit,default=20"`
+		Offset     int    `form:"offset,default=0"`
+		BeforeTime string `form:"beforeTime,default=0"`
+	}
+	CommentPlayListReply {
+		IsMusician    bool        `json:"isMusician"`
+		Cnum          int         `json:"cnum"`
+		UserId        int         `json:"userId"`
+		TopComments   interface{} `json:"topComments"`
+		MoreHot       bool        `json:"moreHot"`
+		HotComments   interface{} `json:"hotComments"`
+		CommentBanner interface{} `json:"commentBanner"`
+		Code          int         `json:"code"`
+		Comments      interface{} `json:"comments"`
+		Total         int         `json:"total"`
+		More          bool        `json:"more"`
+	}
+)
+
+type (
+	CommentVideoReq {
+		Rid        string `form:"rid"`
+		Limit      int    `form:"limit,default=20"`
+		Offset     int    `form:"offset,default=0"`
+		BeforeTime string `form:"beforeTime,default=0"`
+	}
+	CommentVideoReply {
+		IsMusician    bool        `json:"isMusician"`
+		Cnum          int         `json:"cnum"`
+		UserId        int         `json:"userId"`
+		TopComments   interface{} `json:"topComments"`
+		MoreHot       bool        `json:"moreHot"`
+		HotComments   interface{} `json:"hotComments"`
+		CommentBanner interface{} `json:"commentBanner"`
+		Code          int         `json:"code"`
+		Comments      interface{} `json:"comments"`
+		Total         int         `json:"total"`
+		More          bool        `json:"more"`
+	}
+)
+
+service comment-api {
+	// 发送与删除评论
+	@handler Comment
+	get /comment (CommentReq) returns (CommentReply)
+	
+	// 专辑评论
+	@handler CommentAlbum
+	get /comment/album (CommentAlbumReq) returns (CommentAlbumReply)
+	
+	// 电台评论
+	@handler CommentDj
+	get /comment/dj (CommentDjReq) returns (CommentDjReply)
+	
+	//获取动态评论
+	@handler CommentEvent
+	get /comment/event (CommentEventReq) returns (CommentEventReply)
+	
+	@handler CommentFloor
+	get /comment/floor (CommentFloorReq) returns (CommentFloorReply)
+	
+	// 热门评论
+	@handler CommentHot
+	get /comment/hot (CommentHotReq) returns (CommentHotReply)
+	
+	@handler CommentHugList
+	get /comment/hug/list (CommentHugListReq) returns (CommentHugListReply)
+	
+	// 点赞与取消点赞评论
+	@handler CommentLike
+	get /comment/like (CommentLikeReq) returns (CommentLikeReply)
+	
+	// 歌曲评论
+	@handler CommentMusic
+	get /comment/music (CommentMusicReq) returns (CommentMusicReply)
+	
+	@handler CommentMv
+	get /comment/mv (CommentMvReq) returns (CommentMvReply)
+	
+	// 评论
+	@handler CommentNew
+	get /comment/new (CommentNewRep) returns (CommentNewReply)
+	
+	// 歌单评论
+	@handler CommentPlayList
+	get /comment/play/list (CommentPlayListReq) returns (CommentPlayListReply)
+	
+	// 视频评论
+	@handler CommentVideo
+	get /comment/video (CommentVideoReq) returns (CommentVideoReply)
+}

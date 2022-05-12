@@ -1,0 +1,136 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	MvAllReq {
+		Area   string `form:"area,default=全部"`
+		Type   string `form:"type,default=全部"`
+		Order  string `form:"order,default=上升最快"`
+		Tags   string `form:"tags,optional"`
+		Offset int    `form:"offset,default=0"`
+		Total  bool   `form:"total,default=true"`
+		Limit  int    `form:"limit,default=30"`
+	}
+	MvAllReply {
+		Count   int         `json:"count"`
+		HasMore bool        `json:"hasMore"`
+		Data    interface{} `json:"data"`
+		Code    int         `json:"code"`
+	}
+)
+
+type (
+	MvDetailReq {
+		Id int `form:"id"`
+	}
+	MvDetailReply {
+		LoadingPic   string      `json:"loadingPic"`
+		BufferPic    string      `json:"bufferPic"`
+		LoadingPicFS string      `json:"loadingPicFs"`
+		BufferPicFS  string      `json:"bufferPicFs"`
+		Subed        bool        `json:"subed"`
+		Mp           interface{} `json:"mp"`
+		Data         interface{} `json:"data"`
+		Code         int         `json:"code"`
+	}
+)
+
+type (
+	MvDetailInfoReq {
+		Threadid string `form:"threadid"`
+	}
+	MvDetailInfoReply {
+		LikedCount   int  `json:"likedCount"`
+		ShareCount   int  `json:"shareCount"`
+		CommentCount int  `json:"commentCount"`
+		Liked        bool `json:"liked"`
+		Code         int  `json:"code"`
+	}
+)
+
+type (
+	MvExclusiveRcmdReq {
+		Offset int `form:"offset,default=0"`
+		Limit  int `form:"limit,default=30"`
+	}
+	MvExclusiveRcmdReply {
+		Data interface{} `json:"data"`
+		More bool        `json:"more"`
+		Code int         `json:"code"`
+	}
+)
+
+type (
+	MvFirstReq {
+		Area  string `form:"area,default=''"`
+		Limit int    `form:"limit,default=30"`
+		Total bool   `form:"total,default=true"`
+	}
+	MvFirstReply {
+		Data interface{} `json:"data"`
+		Code int         `json:"code"`
+	}
+)
+
+type (
+	MvSubReq {
+		T     string `form:"t,options=sub,unsub"`
+		MvId  int    `form:"mvId"`
+		MvIds string `form:"mvIds"`
+	}
+	MvSubReply {
+	}
+)
+
+type (
+	MvSublistReq {
+		Limit  int  `form:"limit,default=25"`
+		Offset int  `form:"offset,default=0"`
+		Total  bool `form:"total,default=true"`
+	}
+	MvSublistReply {
+		Code    int         `json:"code"`
+		Data    interface{} `json:"data"`
+		HasMore bool        `json:"hasMore"`
+		Count   int         `json:"count"`
+	}
+)
+
+type (
+	MvUrlReq {
+		Id int `form:"id"`
+		R  int `form:"r,default=1080"`
+	}
+	MvUrlReply {
+		Code int         `json:"code"`
+		Data interface{} `json:"data"`
+	}
+)
+
+service mv-api{
+	@handler MvAll
+	get /mv/all (MvAllReq) returns (MvAllReply)
+	
+	@handler MvDetail
+	get /mv/detail (MvDetailReq) returns (MvDetailReply)
+	
+	@handler MvDetailInfo
+	get /mv/detail/info (MvDetailInfoReq) returns (MvDetailInfoReply)
+	
+	@handler MvExclusiveRcmd
+	get /mv/exclusive/rcmd (MvExclusiveRcmdReq) returns (MvExclusiveRcmdReply)
+	
+	@handler MvFirst
+	get /mv/first (MvFirstReq) returns (MvFirstReply)
+	
+	@handler MvUrl
+	get /mv/url (MvUrlReq) returns (MvUrlReply)
+	
+}

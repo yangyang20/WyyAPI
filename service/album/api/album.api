@@ -1,0 +1,139 @@
+syntax = "v1"
+
+type (
+    AlbumReq {
+        Id int `form:"id"`
+    }
+    AlbumReply {
+        ResourceState bool `json:"resourceState"`
+        Songs interface{} `json:"songs"`
+        Code int `json:"code"`
+        Album interface{} `json:"album"`
+    }
+)
+
+type (
+    AlbumDetailReq {
+        Id int `form:"id"`
+    }
+    AlbumDetailReply {
+    }
+)
+
+type (
+    AlbumDetailDynamicReq {
+        Id int `form:"id"`
+    }
+    AlbumDetailDynamicReply {
+        OnSale bool `json:"onSale"`
+        AlbumGameInfo interface{} `json:"albumGameInfo"`
+        CommentCount int `json:"commentCount"`
+        LikedCount int `json:"likedCount"`
+        ShareCount int `json:"shareCount"`
+        IsSub bool `json:"isSub"`
+        SubTime int `json:"subTime"`
+        SubCount int `json:"subCount"`
+        Code int `json:"code"`
+    }
+)
+
+type (
+    AlbumListReq {
+        Limit int `form:"limit,default=30"`
+        Offset int `form:"offset,default=0"`
+        Total bool `form:"total,default=true"`
+        Area string `form:"area,options=ALL,ZH,EA,KR,JP,default=ALL"`
+        Type int `form:"type"`
+    }
+    AlbumListReply {
+        Products interface{} `json:"products"`
+        Code int `json:"code"`
+    }
+)
+
+type (
+    AlbumListStyleReq {
+        Limit int `form:"limit,default=10"`
+        Offset int `form:"offset,default=0"`
+        Total bool `form:"total,default=true"`
+        Area string `form:"area,options=Z_H,E_A,KR,JP,default=Z_H"`
+    }
+    AlbumListStyleReply {
+        Code int `json:"code"`
+        HasNextPage bool `json:"hasNextPage"`
+        AlbumProducts interface{} `json:"albumProducts"`
+    }
+)
+
+type (
+    AlbumNewReq {
+        Limit int `form:"limit,default=30"`
+        Offset int `form:"offset,default=0"`
+        Total bool `form:"total,default=true"`
+        Area string `form:"area,options=ALL,ZH,EA,KR,JP,default=ALL"`
+    }
+    AlbumNewReply {
+        Total int `json:"total"`
+        Albums interface{} `json:"albums"`
+        Code int `json:"code"`
+    }
+)
+
+type (
+    AlbumNewestReq {
+    }
+    AlbumNewestReply {
+        Code int `json:"code"`
+        Albums interface{} `json:"albums"`
+    }
+)
+
+type (
+    AlbumSongsaleboardReq {
+        AlbumType int `form:"albumType,default=0"`
+        Type string `form:"type,options=daily,week,year,total,default=daily"`
+        Year int `form:"year,optional"`
+    }
+    AlbumSongsaleboardReply {
+        Products interface{} `json:"products"`
+        Code int `json:"code"`
+    }
+)
+
+type (
+    AlbumSubReq {
+        T string `form:"t,options=sub,unsub"`
+        Id int `form:"id"`
+    }
+)
+
+type (
+    AlbumSubListReq {
+        Limit int `form:"limit,default=25"`
+        Offset int `form:"offset,default=0"`
+        Total bool `form:"total,default=true"`
+    }
+)
+
+service Album-api {
+    @handler Album
+    get /album (AlbumReq) returns (AlbumReply)
+
+    @handler AlbumDetailDynamic
+    get /album/detail/dynamic (AlbumDetailDynamicReq) returns (AlbumDetailDynamicReply)
+
+    @handler AlbumList
+    get /album/list (AlbumListReq) returns (AlbumListReply)
+
+    @handler AlbumListStyle
+    get /album/list/style (AlbumListStyleReq) returns (AlbumListStyleReply)
+
+    @handler AlbumNew
+    get /album/new (AlbumNewReq) returns (AlbumNewReply)
+
+    @handler AlbumNewest
+    get /album/newest (AlbumNewestReq) returns (AlbumNewestReply)
+
+    @handler AlbumSongsaleboard
+    get /album/songsaleboard (AlbumSongsaleboardReq) returns (AlbumSongsaleboardReply)
+}

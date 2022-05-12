@@ -1,0 +1,357 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	DjBannerReq {
+	}
+	DjBannerReqly {
+		Data interface{} `json:"data"`
+		Code int         `json:"code"`
+	}
+)
+
+type (
+	DjCategoryExcludehotReq {
+	}
+	DjCategoryExcludehotReqly {
+		Data interface{} `json:"data"`
+		Code int         `json:"code"`
+	}
+)
+
+type (
+	DjCategoryRecommendReq {
+	}
+	DjCategoryRecommendReqly {
+		Data interface{} `json:"data"`
+		Code int         `json:"code"`
+	}
+)
+
+type (
+	DjCatelistReq {
+	}
+	DjCatelistReply {
+		Data interface{} `json:"data"`
+		Code int         `json:"code"`
+	}
+)
+
+type (
+	DjDetailReq {
+		Id int `form:"id"`
+	}
+	DjDetailReply {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	DjHotReq {
+		Limit  int `form:"limit,default=30"`
+		Offset int `form:"offset,default=0"`
+	}
+	DjHotReply {
+		DjRadios interface{} `json:"djRadios"`
+		HasMore  bool        `json:"hasMore"`
+		Code     int         `json:"code"`
+	}
+)
+
+type (
+	DjPaygiftReq {
+		Limit  int `form:"limit,default=30"`
+		Offset int `form:"offset,default=0"`
+	}
+	DjPaygiftReply {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	DjPersonalizeRecommendReq {
+		Limit int `form:"limit,default=6"`
+	}
+	DjPersonalizeRecommendReply {
+		Code int         `json:"code"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	DjProgramReq {
+		RadioId int  `form:"radioId"`
+		Limit   int  `form:"limit,default=30"`
+		Offset  int  `form:"offset,default=0"`
+		Asc     bool `form:"asc,default=false"`
+	}
+	DjProgramReply {
+		Count    int         `json:"count"`
+		Code     int         `json:"code"`
+		Programs interface{} `json:"programs"`
+		More     bool        `json:"more"`
+	}
+)
+
+type (
+	DjProgramDetailReq {
+		Id int `form:"id"`
+	}
+	DjProgramDetailReply {
+		Program interface{} `json:"program"`
+		Code    int         `json:"code"`
+	}
+)
+
+type (
+	DjProgramToplistReq {
+		Limit  int `form:"limit,default=100"`
+		Offset int `form:"offset,default=0"`
+	}
+	DjProgramToplistReply {
+		UpdateTime string      `json:"updateTime"`
+		Toplist    interface{} `json:"toplist"`
+		Code       int         `json:"code"`
+	}
+)
+
+type (
+	DjProgramToplistHoursReq {
+		Limit int `form:"limit,default=100"`
+	}
+	DjProgramToplistHoursReply {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	DjRadioHotReq {
+		CateId int `form:"cateId"`
+		Limit  int `form:"limit,default=30"`
+		Offset int `form:"offset,default=0"`
+	}
+	DjRadioHotReply {
+		DjRadios interface{} `json:"djRadios"`
+		HasMore  bool        `json:"hasMore"`
+		Count    int         `json:"count"`
+		Code     int         `json:"code"`
+	}
+)
+
+type (
+	DjRecommendReq {
+	}
+	DjRecommedReply {
+		DjRadios interface{} `json:"djRadios"`
+		Name     string      `json:"name"`
+		Code     int         `json:"code"`
+	}
+)
+
+type (
+	DjRecommendTypeReq {
+		CateId int `form:"cateId"`
+	}
+	DjRecommendTypeReply {
+		DjRadios interface{} `json:"djRadios"`
+		HasMore  bool        `json:"hasMore"`
+		Code     int         `json:"code"`
+	}
+)
+
+type (
+	DjSubReq {
+		T  string `form:"t,options=sub,unsub"`
+		Id int    `form:"id"`
+	}
+	DjSubReply {
+	}
+)
+
+type (
+	DjSublistReq {
+		Limit  int  `form:"limit,default=30"`
+		Offset int  `form:"offset,default=0"`
+		Total  bool `form:"total,default=true"`
+	}
+	DjSublistReply {
+		Count    int         `json:"count"`
+		DjRadios interface{} `json:"djRadios"`
+		Time     int         `json:"time"`
+		HasMore  bool        `json:"hasMore"`
+		Code     int         `json:"code"`
+	}
+)
+
+type (
+	DjSubscriberReq {
+		Time  string `form:"time,default=-1"`
+		Id    int    `form:"id"`
+		Limit int    `form:"limit,default=20"`
+		Total bool   `form:"total,default=true"`
+	}
+	DjSubscriberReply {
+		Subscribers interface{} `json:"subscribers"`
+		Time        int         `json:"time"`
+		HasMore     bool        `json:"hasMore"`
+		Code        int         `json:"code"`
+	}
+)
+
+type (
+	DjTodayPerferedReq {
+		Page int `form:"page,default=0"`
+	}
+	DjTodayPerferedReply {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	DjToplistReq {
+		Type   int `form:"type,options=0,1,default=0"`
+		Limit  int `form:"limit,default=100"`
+		Offset int `form:"offset,default=0"`
+	}
+
+	DjToplistReply {
+		UpdateTime string      `json:"updateTime"`
+		Toplist    interface{} `json:"toplist"`
+		Code       int         `json:"code"`
+	}
+)
+
+type (
+	DjToplistHoursReq {
+		Limit int `form:"limit,default=100"`
+	}
+
+	DjToplistHoursReply {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	DjToplistNewcomerReq {
+		Limit  int `form:"limit,default=100"`
+		Offset int `form:"offset,default=0"`
+	}
+
+	DjToplistNewcomerReply {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	DjToplistPayReq {
+		Limit int `form:"limit,default=100"`
+	}
+
+	DjToplistPayReply {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+type (
+	DjToplistPopularReq {
+		Limit int `form:"limit,default=100"`
+	}
+
+	DjToplistPopularReply {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+service dj-api{
+	@handler DjBanner
+	get /dj/banner (DjBannerReq) returns (DjBannerReqly)
+	
+	@handler DjCategoryExcludehot
+	get /dj/category/excludehot (DjCategoryExcludehotReq) returns (DjCategoryExcludehotReqly)
+	
+	@handler DjCategoryRecommend
+	get /dj/category/recommend (DjCategoryRecommendReq) returns (DjCategoryRecommendReqly)
+	
+	@handler DjCatelist
+	get /dj/catelist (DjCatelistReq) returns (DjCatelistReply)
+	
+	@handler DjDetail
+	get /dj/detail (DjDetailReq) returns (DjDetailReply)
+	
+	@handler DjHot
+	get /dj/hot (DjHotReq) returns (DjHotReply)
+	
+	@handler DjPaygift
+	get /dj/paygift (DjPaygiftReq) returns (DjPaygiftReply)
+	
+	@handler DjPersonalizeRecommend
+	get /dj/personalize/recommend (DjPersonalizeRecommendReq) returns (DjPersonalizeRecommendReply)
+	
+	@handler DjProgram
+	get /dj/program (DjProgramReq) returns (DjProgramReply)
+	
+	@handler DjProgramDetail
+	get /dj/program/detail (DjProgramDetailReq) returns (DjProgramDetailReply)
+	
+	@handler DjProgramToplist
+	get /dj/program/toplist (DjProgramToplistReq) returns (DjProgramToplistReply)
+	
+	@handler DjProgramToplistHours
+	get /dj/program/toplist/hours (DjProgramToplistHoursReq) returns (DjProgramToplistHoursReply)
+	
+	@handler DjRadioHot
+	get /dj/radio/hot (DjRadioHotReq) returns (DjRadioHotReply)
+	
+	@handler DjRecommend
+	get /dj/recommend (DjRecommendReq) returns (DjRecommedReply)
+	
+	@handler DjRecommendType
+	get /dj/recommend/type (DjRecommendTypeReq) returns (DjRecommendTypeReply)
+	
+	@handler DjSublist
+	get /dj/sublist (DjSublistReq) returns (DjSublistReply)
+	
+	@handler DjSubscriber
+	get /dj/subscriber (DjSubscriberReq) returns (DjSubscriberReply)
+	
+	@handler DjTodayPerfered
+	get /dj/today/perfered (DjTodayPerferedReq) returns (DjTodayPerferedReply)
+	
+	@handler  DjToplist
+	get /dj/toplist (DjToplistReq) returns (DjToplistReply)
+	
+	@handler DjToplistHours
+	get /dj/toplist/hours (DjToplistHoursReq) returns (DjToplistHoursReply)
+	
+	@handler  DjToplistNewcomer
+	get /dj/toplist/newcomer (DjToplistNewcomerReq) returns (DjToplistNewcomerReply)
+	
+	@handler DjToplistPay
+	get /dj/toplist/pay (DjToplistPayReq) returns (DjToplistPayReply)
+	
+	@handler DjToplistPopular
+	get /dj/toplist/popular (DjToplistPopularReq) returns (DjToplistPopularReply)
+}
