@@ -1,0 +1,93 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	SearchReq {
+		Type     string `form:"type"`
+		Keywords string `form:"keywords"`
+		Scene    string `form:"scene"`
+		Limit    string `form:"limit,default=30"`
+		Offset   int    `form:"offset,default=0"`
+	}
+
+	SearchReply {
+		Result interface{} `json:"result"`
+		Code   int         `json:"code"`
+	}
+)
+
+type (
+	SearchDefaultReq {
+	}
+	SearchDefaultReply {
+		Code    int         `json:"code"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+)
+
+type (
+	SearchHotReq {
+		Type int `form:"type,default=1111"`
+	}
+	SearchHotReply {
+		Code   int         `json:"code"`
+		Result interface{} `json:"result"`
+	}
+)
+
+type (
+	SearchHotDetailReply {
+		Code    int         `json:"code"`
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+)
+
+type (
+	SearchMultimatchReq {
+		Type int    `form:"type,default=1"`
+		S    string `form:"s,default=''"`
+	}
+	SearchMultimatchReply {
+		Code int `json:"code"`
+	}
+)
+
+type (
+	SearchSuggestReq {
+		Keywords string `form:"keywords,default=''"`
+		Type     string `form:"type,optional"`
+	}
+	SearchSuggestReply {
+		Result interface{} `json:"result"`
+		Code   int         `json:"code"`
+	}
+)
+
+service search-api{
+	@handler Search
+	get /search (SearchReq) returns (SearchReply)
+	
+	@handler SearchDefault
+	get /search/default (SearchDefaultReq) returns (SearchDefaultReply)
+	
+	@handler SearchHot
+	get /search/hot (SearchHotReq) returns (SearchHotReply)
+	
+	@handler SearchHotDetail
+	get /search/hot/detail returns(SearchHotDetailReply)
+	
+	@handler SearchMultimatch
+	get /search/multimatch (SearchMultimatchReq) returns (SearchMultimatchReply)
+	
+	@handler SearchSuggest
+	get /search/suggest (SearchSuggestReq) returns (SearchSuggestReply)
+}
