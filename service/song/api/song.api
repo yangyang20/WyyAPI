@@ -1,0 +1,72 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	SongDetailReq {
+		Ids string `form:"ids"`
+	}
+	SongDetailReply {
+		Songs      interface{} `json:"songs"`
+		Privileges interface{} `json:"privileges"`
+		Code       int         `json:"code"`
+	}
+)
+
+type (
+	SongDownloadUrlReq {
+		Id int `form:"id"`
+		Br int `form:"br,default=999000"`
+	}
+	SongDownloadUrlReply {
+		Data interface{} `json:"data"`
+		Code int         `json:"code"`
+	}
+)
+
+type (
+	SongOrderUpdateReq {
+		Pid      int    `form:"pid"`
+		TrackIds string `form:"trackIds"`
+		Op       string `form:"op,default=update"`
+	}
+	SongOrderUpdateReply {
+	}
+)
+
+type (
+	SongPurchasedReq {
+		Limit  int `form:"limit,default=20"`
+		Offset int `form:"offset,default=0"`
+	}
+	SongPurchasedReply {
+	}
+)
+
+type (
+	SongUrlReq {
+		Id int `form:"id"`
+		Br int `form:"br,default=999000"`
+	}
+	SongUrlReply {
+		Data interface{} `json:"data"`
+		Code int         `json:"code"`
+	}
+)
+
+service song-api{
+	@handler SongDetail
+	get /song/detail (SongDetailReq) returns (SongDetailReply)
+	
+	@handler SongDownloadUrl
+	get /song/download/url (SongDownloadUrlReq) returns (SongDownloadUrlReply)
+	
+	@handler SongUrl
+	get /song/url (SongUrlReq) returns (SongUrlReply)
+}
